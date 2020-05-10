@@ -89,11 +89,11 @@ namespace NavigationAndLocalization
                 var obstacles = ConstructObstacles(R, C, r, c);//Restricting Obstacles with R,C space. and grid is bounded between 0,0 and R,C
                 _ = new ChittiTheRobot(R, C, new Point(r, c, FacingDirection.Right), cmd, obstacles);
                 Console.WriteLine("\n=======================================================================\n");
-                Console.WriteLine($"Run Summary: Grid size is ({R}x{C}). Grid has {obstacles.Count} Obstacles.  {cmd.Length} Commands Executed. ");
+                Console.WriteLine($"Run Summary: Grid size is ({R}x{C}). Grid has {obstacles.Count} Obstacles. Robot Started at ({r},{c})   {cmd.Length} Commands Executed. ");
                 Console.WriteLine("\n=======================================================================\n");
                 Console.WriteLine("Continue with another simulation?. Yes or No");
             }
-            while (Console.ReadLine().Equals("Yes", StringComparison.CurrentCultureIgnoreCase));
+            while (Console.ReadLine().Trim().Equals("Yes", StringComparison.CurrentCultureIgnoreCase));
 
             Console.ReadLine();
         }
@@ -132,7 +132,7 @@ namespace NavigationAndLocalization
                         obstacle = new Rock(new Point(r, c));
                         break;
                     case ObstacleType.Hole:
-                        obstacle = new Hole(new Point(r, c), new Point(Math.Min(r+2,R-1),c));//Linking everyHole to a  Point 2 steps after. Ignoring the possibility of a obstacle being there at that point, Since hole bypasses others
+                        obstacle = new Hole(new Point(r, c), new Point(_random.Next(0,R/2), _random.Next(0,C/2)));//Linking everyHole to a  Point 2 steps after. Ignoring the possibility of a obstacle being there at that point, Since hole bypasses others
                         break;
                     case ObstacleType.Spinner:
                         obstacle = new Spinner(new Point(r, c));
