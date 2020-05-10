@@ -17,8 +17,8 @@ namespace NavigationAndLocalization
 
                 if (Console.ReadLine().Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    Console.WriteLine("Enter 1 or 2 " +
-                        "1 =Long simulation" +
+                    Console.WriteLine("Enter 1 or 2 \n" +
+                        "1 =Long simulation\n" +
                         "2= Short Simulation");
                     var str = "LFR";
                     if (Console.ReadLine() == "2")
@@ -86,8 +86,11 @@ namespace NavigationAndLocalization
 
                 var grid = ConstructGrid(10, 10);//Not needed for this sortof implementation. If we plan to merge grid and obstacles as a map, This problem is much more simplified. though the time complexity and space complexity will increase n^2 fold
                 Console.WriteLine($"Command given is {cmd}");
-                var obstacles = ConstructObstacles(R, C, r, c);//Restricting Obstacles with R,C space. Once we cross that, grid is obstacle free. and grid is bounded at 0,0 and goes on to Infinity and beyond.
+                var obstacles = ConstructObstacles(R, C, r, c);//Restricting Obstacles with R,C space. and grid is bounded between 0,0 and R,C
                 _ = new ChittiTheRobot(R, C, new Point(r, c, FacingDirection.Right), cmd, obstacles);
+                Console.WriteLine("\n=======================================================================\n");
+                Console.WriteLine($"Run Summary: Grid size is ({R}x{C}). Grid has {obstacles.Count} Obstacles.  {cmd.Length} Commands Executed. ");
+                Console.WriteLine("\n=======================================================================\n");
                 Console.WriteLine("Continue with another simulation?. Yes or No");
             }
             while (Console.ReadLine().Equals("Yes", StringComparison.CurrentCultureIgnoreCase));
