@@ -9,8 +9,13 @@ namespace NavigationAndLocalization
         public Point currPos { get; set; }
         private char currCommand { get; set; }
 
-        public ChittiTheRobot(Point start, string commands, List<IObstacle> obstacleList)
+        private int R { get; set; }
+        private int C { get; set; }
+
+        public ChittiTheRobot(int r,int c,Point start, string commands, List<IObstacle> obstacleList)
         {
+            R = r;
+            C = c;
             currPos = start;
             obstacles = obstacleList;
             ExecuteCommands(commands);
@@ -21,9 +26,18 @@ namespace NavigationAndLocalization
             foreach (char c in cmd)
             {
                 currCommand = c;
-                if (c.Equals('F')) { Navigate(MoveType.Forward); continue; }
-                if (c.Equals('L')) { Navigate(MoveType.Left); continue; }
-                if (c.Equals('R')) { Navigate(MoveType.Right); continue; }
+                if (c.Equals('F'))
+                {
+                    Navigate(MoveType.Forward); continue;
+                }
+                if (c.Equals('L'))
+                {
+                    Navigate(MoveType.Left); continue;
+                }
+                if (c.Equals('R'))
+                {
+                    Navigate(MoveType.Right); continue;
+                }
             }
         }
 
@@ -146,7 +160,7 @@ namespace NavigationAndLocalization
 
         private bool BoundaryReset(Point newPos)
         {
-            if (newPos.Row < 0 || newPos.Col < 0)
+            if (newPos.Row < 0 || newPos.Col < 0 || newPos.Row> R || newPos.Col>C)
             {
                 Console.WriteLine("Chitti The Robot is Trying to Go Out of Boundary. Hence the movement is Restricted");
                 return true;
